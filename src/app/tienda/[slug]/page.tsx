@@ -4,7 +4,6 @@ import { formatPrice, getCategory, getProduct, products, site } from "@/lib/data
 import { pageMetadata } from "@/lib/seo";
 import { AddToCartWithQty } from "@/components/AddToCart";
 import { Pack } from "@/components/Pack";
-import { Rings } from "@/components/Rings";
 
 export const dynamicParams = false;
 
@@ -55,8 +54,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
       </ol>
       <div className="pdp">
         <div className="pdp__media">
-          <Rings size={420} count={6} className="cat-card__ring" style={{ top: "auto", right: "auto", opacity: 0.5 }} />
-          <Pack fruit={p.fruit} className="pack" />
+          <Pack fruit={p.fruit} />
         </div>
         <div className="pdp__info">
           <p className="eyebrow">{cat?.name}</p>
@@ -67,7 +65,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
           <p>{p.description}</p>
           <p className="product-card__meta">Contenido: {p.weight}</p>
           <AddToCartWithQty slug={p.slug} name={p.name} />
-          {p.demo && <p className="notice">Producto de ejemplo: imagen, precio y datos son provisorios.</p>}
+          {p.demo && <p className="notice">Imagen de referencia: precio y datos son provisorios.</p>}
           <div className="accordion">
             <details open><summary>Ingredientes</summary><div className="acc-body"><Pending text={p.ingredients} /></div></details>
             <details><summary>Información nutricional</summary><div className="acc-body"><Pending text={p.nutrition} /></div></details>

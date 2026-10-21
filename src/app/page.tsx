@@ -17,21 +17,27 @@ export default function Home() {
   return (
     <>
       <section className="hero">
-        <Rings size={640} count={7} className="rings" style={{ right: "-160px", top: "-120px" }} />
+        <Rings size={620} count={7} className="rings" style={{ right: "-180px", top: "-140px" }} />
         <div className="container hero__inner">
           <div className="hero__copy">
-            <p className="eyebrow" style={{ color: "var(--sky)" }}>{site.tagline}</p>
+            <p className="eyebrow">{site.tagline}</p>
             <h1>Fruta deshidratada con tecnología DIC</h1>
-            <p>Snacks de fruta para comer solos o sumar a tus comidas. Armá tu pedido online en pocos pasos.</p>
+            <p>Frutilla, banana, arándanos y frambuesa en bolsas de 150 g. Elegí, armá tu pedido y comprá online.</p>
             <div className="hero__cta">
-              <Link href="/tienda/" className="btn btn--lime">Comprar ahora</Link>
-              <Link href="/tecnologia-dic/" className="btn btn--ghost-light">Qué es DIC</Link>
+              <Link href="/tienda/" className="btn btn--primary">Comprar ahora</Link>
+              <Link href="/tecnologia-dic/" className="btn btn--ghost">Qué es DIC</Link>
             </div>
+            <ul className="hero__badges">
+              <li>Bolsas de 150 g</li>
+              <li>Tecnología DIC</li>
+              <li>Planta propia</li>
+            </ul>
           </div>
-          <div className="hero__packs" aria-hidden="true">
-            <div style={{ left: "2%", bottom: 0, width: "34%", transform: "rotate(-7deg)" }}><Pack fruit="frutilla" /></div>
-            <div style={{ left: "30%", bottom: "14px", width: "40%", zIndex: 2 }}><Pack fruit="banana" /></div>
-            <div style={{ right: "2%", bottom: 0, width: "34%", transform: "rotate(7deg)" }}><Pack fruit="frambuesa" /></div>
+          <div className="hero__mosaic">
+            <Pack fruit="frutilla" />
+            <Pack fruit="banana" />
+            <Pack fruit="arandano" />
+            <Pack fruit="frambuesa" />
           </div>
         </div>
       </section>
@@ -42,12 +48,14 @@ export default function Home() {
             <p className="eyebrow">Comprá por categoría</p>
             <h2>Elegí qué querés probar</h2>
           </div>
-          <div className="cat-grid">
-            {categories.map((c, i) => (
-              <Link key={c.slug} href="/tienda/" className={`cat-card${i === 0 ? " cat-card--green" : ""}`}>
-                <Rings size={200} count={4} className="cat-card__ring" />
-                <h3>{c.name}</h3>
-                <p>{c.description}</p>
+          <div className="tile-grid">
+            {categories.map((c) => (
+              <Link key={c.slug} href="/tienda/" className="tile">
+                <Pack fruit={c.slug === "packs" ? "pack" : "frutilla"} />
+                <div className="tile__text">
+                  <h3>{c.name}</h3>
+                  <span>{c.description}</span>
+                </div>
               </Link>
             ))}
           </div>
@@ -99,17 +107,17 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section section--green">
+      <section className="section">
         <div className="container">
-          <div className="section-head">
-            <p className="eyebrow" style={{ color: "var(--sky)" }}>Nuestros valores</p>
-            <h2>Una marca con propósito</h2>
-          </div>
-          <div className="values">
-            <div className="value"><h3>Innovación</h3><p>Desarrollamos productos con tecnología propia.</p></div>
-            <div className="value"><h3>Transparencia</h3><p>Decimos qué hacemos y cómo lo hacemos, sin promesas sin respaldo.</p></div>
-            <div className="value"><h3>Calidad</h3><p>Controlamos el proceso en nuestra planta.</p></div>
-            <div className="value"><h3>Compromiso</h3><p>Acompañamos a quienes compran y a quienes trabajan con nosotros.</p></div>
+          <div className="feature">
+            <Rings size={420} count={6} className="rings" style={{ left: "-120px", bottom: "-160px", color: "var(--lime)", opacity: 0.25 }} />
+            <div className="feature__text">
+              <p className="eyebrow" style={{ color: "var(--sky)" }}>Tecnología DIC</p>
+              <h2>La fruta, deshidratada con nuestra propia tecnología</h2>
+              <p>Usamos descompresión instantánea controlada en nuestra planta. Conocé cómo funciona el proceso.</p>
+              <Link href="/tecnologia-dic/" className="btn btn--lime">Conocer DIC</Link>
+            </div>
+            <div className="feature__img"><Pack fruit="arandano" /></div>
           </div>
         </div>
       </section>
