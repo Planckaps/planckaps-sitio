@@ -1,49 +1,27 @@
-import site from "@/data/site.json";
-import home from "@/data/home.json";
-import categoriesJson from "@/data/categories.json";
-import segmentsJson from "@/data/segments.json";
-import formatsJson from "@/data/formats.json";
+import siteJson from "@/data/site.json";
 import productsJson from "@/data/products.json";
-import type { Category, Format, Product, Segment } from "./types";
+import faqJson from "@/data/faq.json";
+import type { Category, Faq, Product, Site } from "./types";
 
-export { site, home };
+export const site = siteJson as Site;
+export const categories = productsJson.categories as Category[];
+export const products = productsJson.products as Product[];
+export const faq = faqJson as Faq[];
 
-export const categories = categoriesJson as Category[];
-export const segments = segmentsJson as Segment[];
-/** Mismo dato que `segments`, con el nombre que usamos en los textos comerciales. */
-export const applications = segmentsJson as Segment[];
-export const formats = formatsJson as Format[];
-export const products = productsJson as Product[];
+export const getProduct = (slug: string) => products.find((p) => p.slug === slug);
+export const getCategory = (slug: string) => categories.find((c) => c.slug === slug);
+export const featuredProducts = () => products.filter((p) => p.featured);
 
-export const getCategory = (slug: string) =>
-  categories.find((c) => c.slug === slug);
+export function formatPrice(price: number | null): string {
+  if (price === null) return "Precio a definir";
+  return new Intl.NumberFormat("es-AR", {
+    style: "currency",
+    currency: "ARS",
+    maximumFractionDigits: 0,
+  }).format(price);
+}
 
-export const getSegment = (slug: string) =>
-  segments.find((s) => s.slug === slug);
-
-export const getFormat = (slug: string) => formats.find((f) => f.slug === slug);
-
-export const getProduct = (categorySlug: string, slug: string) =>
-  products.find((p) => p.category === categorySlug && p.slug === slug);
-
-export const getProductById = (id: string) => products.find((p) => p.id === id);
-
-export const getProductsByIds = (ids: string[]) =>
-  ids
-    .map((id) => products.find((p) => p.id === id))
-    .filter((p): p is Product => Boolean(p));
-
-export const getSegmentNames = (slugs: string[]) =>
-  slugs
-    .map((slug) => getSegment(slug)?.name)
-    .filter((name): name is string => Boolean(name));
-
-export const getFormatNames = (slugs: string[]) =>
-  slugs
-    .map((slug) => getFormat(slug)?.name)
-    .filter((name): name is string => Boolean(name));
-
-export const productHref = (p: Product) => `/productos/${p.category}/${p.slug}`;
-
-export const whatsappHref = () =>
-  `https://wa.me/${site.whatsapp.number}?text=${encodeURIComponent(site.whatsapp.message)}`;
+export function whatsappUrl(message?: string): string {
+  const text = encodeURIComponent(message ?? site.whatsapp.message);
+  return `https://wa.me/${site.whatsapp.number}?text=${text}`;
+}

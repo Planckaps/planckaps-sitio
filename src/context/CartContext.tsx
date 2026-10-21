@@ -1,103 +1,68 @@
 "use client";
 
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
-import type { CartLine } from "@/lib/types";
+import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 
-const STORAGE_KEY = "dic-carrito";
+export type CartLine = { slug: string; qty: number };
 
-interface CartContextValue {
+type CartCtx = {
   lines: CartLine[];
-  /** Cantidad total de unidades en el carrito (para el ícono del header). */
   count: number;
-  addLine: (line: CartLine) => void;
-  removeLine: (productId: string, formatSlug: string) => void;
-  setQuantity: (productId: string, formatSlug: string, quantity: number) => void;
+  add: (slug: string, qty?: number) => void;
+  setQty: (slug: string, qty: number) => void;
+  remove: (slug: string) => void;
   clear: () => void;
-}
+};
 
-const CartContext = createContext<CartContextValue | null>(null);
-
-const sameLine = (a: CartLine, b: { productId: string; formatSlug: string }) =>
-  a.productId === b.productId && a.formatSlug === b.formatSlug;
+const KEY = "planckaps-carrito";
+const Ctx = createContext<CartCtx | null>(null);
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [lines, setLines] = useState<CartLine[]>([]);
-  // El carrito se guarda en este navegador (localStorage): cada visitante
-  // tiene el suyo, no se comparte entre personas ni se ve desde el servidor.
-  const [hydrated, setHydrated] = useState(false);
+  const [ready, setReady] = useState(false);
 
   useEffect(() => {
     try {
-      const raw = window.localStorage.getItem(STORAGE_KEY);
-      // Leer el carrito guardado en este navegador al montar es justo el caso
-      // que el hook de sincronización con sistemas externos existe para cubrir.
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      if (raw) setLines(JSON.parse(raw));
+      const raw = window.localStorage.getItem(KEY);
+      if (raw) setLines(JSON.parse(raw) as CartLine[]);
     } catch {
-      // localStorage no disponible (modo privado, etc.): seguimos con carrito vacío.
+      /* sin almacenamiento: el carrito vive solo en memoria */
     }
-    setHydrated(true);
+    setReady(true);
   }, []);
 
   useEffect(() => {
-    if (!hydrated) return;
+    if (!ready) return;
     try {
-      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(lines));
+      window.localStorage.setItem(KEY, JSON.stringify(lines));
     } catch {
-      // sin espacio o sin acceso a localStorage: no rompemos la app.
+      /* ignorar */
     }
-  }, [lines, hydrated]);
+  }, [lines, ready]);
 
-  const addLine = useCallback((line: CartLine) => {
+  const add = useCallback((slug: string, qty = 1) => {
     setLines((prev) => {
-      const existing = prev.find((l) => sameLine(l, line));
-      if (existing) {
-        return prev.map((l) =>
-          sameLine(l, line) ? { ...l, quantity: l.quantity + line.quantity } : l,
-        );
-      }
-      return [...prev, line];
+      const found = prev.find((l) => l.slug === slug);
+      if (found) return prev.map((l) => (l.slug === slug ? { ...l, qty: l.qty + qty } : l));
+      return [...prev, { slug, qty }];
     });
   }, []);
-
-  const removeLine = useCallback((productId: string, formatSlug: string) => {
-    setLines((prev) => prev.filter((l) => !sameLine(l, { productId, formatSlug })));
+  const setQty = useCallback((slug: string, qty: number) => {
+    setLines((prev) =>
+      qty <= 0 ? prev.filter((l) => l.slug !== slug) : prev.map((l) => (l.slug === slug ? { ...l, qty } : l)),
+    );
   }, []);
-
-  const setQuantity = useCallback(
-    (productId: string, formatSlug: string, quantity: number) => {
-      setLines((prev) =>
-        quantity <= 0
-          ? prev.filter((l) => !sameLine(l, { productId, formatSlug }))
-          : prev.map((l) =>
-              sameLine(l, { productId, formatSlug }) ? { ...l, quantity } : l,
-            ),
-      );
-    },
-    [],
-  );
-
+  const remove = useCallback((slug: string) => setLines((prev) => prev.filter((l) => l.slug !== slug)), []);
   const clear = useCallback(() => setLines([]), []);
 
-  const count = useMemo(() => lines.reduce((sum, l) => sum + l.quantity, 0), [lines]);
-
-  const value = useMemo(
-    () => ({ lines, count, addLine, removeLine, setQuantity, clear }),
-    [lines, count, addLine, removeLine, setQuantity, clear],
+  const value = useMemo<CartCtx>(
+    () => ({ lines, count: lines.reduce((n, l) => n + l.qty, 0), add, setQty, remove, clear }),
+    [lines, add, setQty, remove, clear],
   );
-
-  return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
+  return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
 }
 
 export function useCart() {
-  const ctx = useContext(CartContext);
-  if (!ctx) throw new Error("useCart debe usarse dentro de <CartProvider>");
-  return ctx;
+  const c = useContext(Ctx);
+  if (!c) throw new Error("useCart debe usarse dentro de CartProvider");
+  return c;
 }

@@ -1,14 +1,16 @@
 {
-  "name": "DIC",
-  "tagline": "Ingredientes premium para crear mejores productos.",
-  "description": "DIC desarrolla ingredientes alimentarios premium de alto valor agregado: frutas, vegetales y polvos procesados con la tecnología DIC (Deshidratación por Impacto Controlado), para gastronomía, heladería, coctelería, chocolatería, pastelería e industria.",
-  "url": "https://dic.example",
-  "urlIsPlaceholder": true,
+  "name": "PLANCKAPS",
+  "legalName": "Nutriscience S.A.S.",
+  "tagline": "Nourishing Solution | Fueling Health",
+  "headline": "Fruta deshidratada con tecnología DIC",
+  "description": "PLANCKAPS: fruta deshidratada con tecnología DIC, desarrollada por Nutriscience S.A.S. Tienda online de snacks de fruta y packs.",
+  "url": "https://planckaps.com.ar",
   "indexable": false,
+  "buildNotice": "Sitio en construcción: productos, precios y datos de ejemplo.",
   "whatsapp": {
     "number": "5490000000000",
     "display": "+54 9 00 0000 0000",
-    "message": "Hola DIC, quiero más información sobre sus ingredientes.",
+    "message": "Hola PLANCKAPS, quiero hacer una consulta.",
     "isPlaceholder": true
   },
   "contact": {
@@ -16,22 +18,17 @@
     "phone": null,
     "address": null
   },
+  "legal": {
+    "cuit": null,
+    "dataFiscal": null,
+    "defensaConsumidorUrl": null,
+    "rne": null
+  },
   "nav": [
-    { "label": "Inicio", "href": "/" },
-    { "label": "Productos", "href": "/productos", "childrenSource": "categories" },
-    { "label": "Aplicaciones", "href": "/para-tu-negocio", "childrenSource": "segments" },
-    {
-      "label": "Para profesionales",
-      "href": "/formato-profesional",
-      "children": [
-        { "label": "Formatos", "href": "/formato-profesional" },
-        { "label": "Compras mayoristas", "href": "/formato-profesional/mayoristas" },
-        { "label": "Solicitar muestra", "href": "/contacto?motivo=muestra" },
-        { "label": "Pedir cotización", "href": "/contacto?motivo=cotizacion" }
-      ]
-    },
-    { "label": "Tecnología DIC", "href": "/tecnologia-dic" },
-    { "label": "Inspiración", "href": "/recetas" },
-    { "label": "Empresa", "href": "/empresa" }
+    { "label": "Tienda", "href": "/tienda/" },
+    { "label": "Tecnología DIC", "href": "/tecnologia-dic/" },
+    { "label": "Nosotros", "href": "/nosotros/" },
+    { "label": "Para empresas", "href": "/empresas/" },
+    { "label": "Ayuda", "href": "/preguntas-frecuentes/" }
   ]
 }

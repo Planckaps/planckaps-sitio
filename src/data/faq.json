@@ -1,0 +1,27 @@
+[
+  {
+    "q": "¿Cómo compro?",
+    "a": "Elegís tus productos, los agregás al carrito y finalizás el pedido. Por ahora el pedido se confirma por WhatsApp. El pago online con Mercado Pago es el próximo paso y todavía no está disponible.",
+    "pending": true
+  },
+  {
+    "q": "¿Hacen envíos a todo el país?",
+    "a": "Los plazos, costos y zonas de envío están en definición. Los vamos a publicar acá antes de abrir la tienda.",
+    "pending": true
+  },
+  {
+    "q": "¿Puedo arrepentirme de mi compra?",
+    "a": "Sí. En compras a distancia hay un plazo de 10 días corridos para revocar la compra, y la tienda tiene un botón de arrepentimiento visible en todo el sitio. El texto legal definitivo está en revisión.",
+    "pending": true
+  },
+  {
+    "q": "¿Qué es la tecnología DIC?",
+    "a": "Es el proceso con el que deshidratamos la fruta en nuestra planta. En la página Tecnología DIC vamos a publicar las explicaciones y los datos de nuestros ensayos propios.",
+    "pending": false
+  },
+  {
+    "q": "¿Venden a empresas, negocios o marcas?",
+    "a": "Sí. PLANCKAPS también desarrolla ingredientes funcionales. Escribinos desde la página Para empresas.",
+    "pending": false
+  }
+]
