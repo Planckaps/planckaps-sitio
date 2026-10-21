@@ -1,0 +1,7 @@
+[
+  { "slug": "100g", "name": "100 g", "grams": 100, "description": "Para probar y desarrollar recetas." },
+  { "slug": "250g", "name": "250 g", "grams": 250, "description": "Uso frecuente en cocina profesional." },
+  { "slug": "500g", "name": "500 g", "grams": 500, "description": "Para producciones medianas." },
+  { "slug": "1kg", "name": "1 kg", "grams": 1000, "description": "Formato de trabajo diario." },
+  { "slug": "mayoristas", "name": "Mayoristas", "grams": null, "description": "Volúmenes mayores, con cotización a medida." }
+]

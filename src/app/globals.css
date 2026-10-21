@@ -1,0 +1,178 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------
+   SISTEMA VISUAL DIC (propuesta de Ciclo 1)
+   Colores, tipografías y movimiento viven acá. Cambiar un valor
+   cambia todo el sitio.
+   ------------------------------------------------------------------ */
+
+@theme {
+  /* Neutros */
+  --color-ink: #0b0e0c; /* negro tinta, fondos oscuros */
+  --color-ink-2: #141a16;
+  --color-paper: #faf9f6; /* blanco cálido, fondo base */
+  --color-bone: #f1eee6; /* hueso, fondo alternativo */
+  /* Verdes (acento de marca) */
+  --color-forest: #1c3a2d;
+  --color-forest-2: #2b5a45;
+  /* Fruta */
+  --color-berry: #d92d4b;
+  --color-berry-2: #ff5a73;
+  --color-citrus: #f2b632;
+  /* Líneas y textos secundarios */
+  --color-muted: #5d655f;
+  --color-line: rgb(11 14 12 / 0.12);
+
+  --ease-premium: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@theme inline {
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-display), ui-serif, Georgia, serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
+
+::selection {
+  background: var(--color-berry);
+  color: #fff;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-berry-2);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ---------- Utilidades de marca ---------- */
+
+@utility container-x {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 1320px;
+  padding-inline: clamp(1.25rem, 4vw, 3rem);
+}
+
+/* Titulares: mayúsculas, apretados, editoriales */
+@utility display {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: -0.035em;
+  line-height: 0.94;
+  text-wrap: balance;
+}
+
+/* Etiquetas técnicas (mono) */
+@utility eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+}
+
+/* Acento serif itálico dentro de un titular */
+@utility accent-serif {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+
+/* ---------- Fondos ---------- */
+
+/* Grilla técnica muy sutil sobre fondos oscuros */
+.tech-grid {
+  background-image:
+    linear-gradient(rgb(255 255 255 / 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(255 255 255 / 0.045) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(70% 70% at 60% 45%, #000 20%, transparent 78%);
+  -webkit-mask-image: radial-gradient(
+    70% 70% at 60% 45%,
+    #000 20%,
+    transparent 78%
+  );
+}
+
+/* Grano fino para dar textura a los placeholders */
+.grain::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.16;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+}
+
+/* ---------- Movimiento ---------- */
+
+@keyframes float-y {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-1.5deg);
+  }
+  50% {
+    transform: translateY(-14px) rotate(1.5deg);
+  }
+}
+
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(2.25rem);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes flow-dash {
+  to {
+    stroke-dashoffset: -48;
+  }
+}
+
+.float-y {
+  animation: float-y 7s ease-in-out infinite;
+}
+
+.flow-dash {
+  animation: flow-dash 2.4s linear infinite;
+}
+
+/* Aparición al hacer scroll, solo CSS (sin JavaScript). Si el navegador
+   no lo soporta, el contenido simplemente se ve sin animación. */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .reveal {
+      animation: reveal-up 1s var(--ease-premium) both;
+      animation-timeline: view();
+      animation-range: entry 4% entry 42%;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .float-y,
+  .flow-dash {
+    animation: none;
+  }
+}

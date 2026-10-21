@@ -1,0 +1,9 @@
+[
+  { "slug": "heladerias", "name": "Heladerías" },
+  { "slug": "gastronomia-restaurantes", "name": "Gastronomía / Restaurantes" },
+  { "slug": "bares-cocteleria", "name": "Bares y Coctelería" },
+  { "slug": "chocolateria", "name": "Chocolatería" },
+  { "slug": "pasteleria", "name": "Pastelería" },
+  { "slug": "hoteles", "name": "Hoteles" },
+  { "slug": "industria-alimentaria", "name": "Industria alimentaria" }
+]

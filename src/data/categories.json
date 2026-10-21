@@ -1,0 +1,10 @@
+[
+  { "slug": "frutas", "name": "Frutas", "description": "Frutas procesadas con tecnología DIC." },
+  { "slug": "frutos-rojos", "name": "Frutos rojos", "description": "Frutillas, frambuesas y más." },
+  { "slug": "citricos", "name": "Cítricos", "description": "Limón, naranja, pomelo y más." },
+  { "slug": "tropicales", "name": "Tropicales", "description": "Mango, ananá y frutas tropicales." },
+  { "slug": "vegetales", "name": "Vegetales", "description": "Vegetales procesados con tecnología DIC." },
+  { "slug": "polvos", "name": "Polvos", "description": "Ingredientes en polvo para formular." },
+  { "slug": "otros-ingredientes", "name": "Otros ingredientes", "description": "Ingredientes complementarios." },
+  { "slug": "combos", "name": "Combos", "description": "Packs de ingredientes seleccionados." }
+]
