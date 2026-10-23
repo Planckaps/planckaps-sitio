@@ -838,6 +838,7 @@ h4 {
   background: var(--ink);
   color: #fff;
   padding-block: clamp(4rem, 8vw, 6rem) 1.5rem;
+  overflow: hidden;
 }
 
 .footer h3 {
@@ -944,4 +945,103 @@ h4 {
 .biz,
 .builder-section {
   padding-top: clamp(5rem, 11vw, 9rem);
+}
+
+/* ----------------- Pie: rodajas de banana sobre la bolsa ------------------ */
+
+.drop {
+  --sh: clamp(330px, 36vw, 520px);
+  --bh: calc(var(--sh) * 0.82);
+  --bw: calc(var(--bh) * 0.699);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 2rem;
+  align-items: center;
+  margin-bottom: clamp(4rem, 8vw, 7rem);
+}
+
+@media (min-width: 900px) {
+  .drop {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: clamp(2rem, 5vw, 5rem);
+  }
+}
+
+.drop__copy h2 {
+  font-family: var(--font);
+  font-size: clamp(2.4rem, 5.4vw, 4.75rem);
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  color: #fff;
+  margin: 0 0 1.25rem;
+  max-width: 9ch;
+}
+
+.drop__copy p {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 1.1rem;
+  max-width: 28rem;
+  margin: 0 0 1.75rem;
+}
+
+.drop__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.drop .btn--add {
+  background: #fff;
+  color: var(--ink);
+}
+
+.drop__again {
+  font: inherit;
+  font-weight: 500;
+  color: #fff;
+  background: #262626;
+  border: 0;
+  border-radius: 0;
+  padding: 0.85rem 1.4rem;
+  cursor: pointer;
+  transition: transform 160ms var(--ease-out), background-color 160ms var(--ease-out);
+}
+
+.drop__again:active {
+  transform: scale(0.97);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .drop__again:hover {
+    background: #3a3a3a;
+  }
+}
+
+.drop__again:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 3px;
+}
+
+.drop__stage {
+  position: relative;
+  height: var(--sh);
+}
+
+.drop__bag {
+  position: absolute;
+  left: calc(50% - var(--bw) / 2);
+  bottom: 0;
+  height: var(--bh);
+  width: var(--bw);
+  transform-origin: 50% 100%;
+}
+
+.drop__chip {
+  position: absolute;
+  height: auto;
+  width: calc(var(--bw) * var(--w));
+  left: calc(50% + var(--bw) * var(--x) - var(--bw) * var(--w) / 2);
+  bottom: calc(var(--bw) * var(--y));
+  will-change: transform;
 }

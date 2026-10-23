@@ -1,11 +1,13 @@
 import Link from "next/link";
 import { site, whatsappUrl } from "@/lib/data";
+import { BananaDrop } from "./BananaDrop";
 
 export function Footer() {
   const { legal, contact } = site;
   return (
     <footer className="footer">
       <div className="container">
+        <BananaDrop />
         <div className="footer__grid">
           <div className="footer__brand">
             
