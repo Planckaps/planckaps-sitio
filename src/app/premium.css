@@ -352,7 +352,6 @@ h4 {
   height: clamp(210px, 25vw, 360px);
   max-width: 100%;
   object-fit: contain;
-  transition: transform 500ms var(--ease-out);
 }
 
 .panel .btn--add {
@@ -372,7 +371,11 @@ h4 {
 .panel--frambuesa { background: #a82a5e; }
 
 @media (hover: hover) and (pointer: fine) {
-  .panel:hover img {
+  .panel .fdrop {
+    transition: transform 500ms var(--ease-out);
+  }
+
+  .panel:hover .fdrop {
     transform: translateY(-8px);
   }
 }
@@ -1056,4 +1059,68 @@ h4 {
   left: calc(50% + var(--bw) * var(--x) - var(--bw) * var(--w) / 2);
   opacity: 0;
   will-change: transform;
+}
+
+
+/* ------------- Bolsas con lluvia de fruta (al tocar Agregar) -------------- */
+
+.fdrop {
+  --lead: clamp(30px, 4.6vw, 62px);
+  position: relative;
+  display: block;
+  aspect-ratio: 551 / 789;
+}
+
+.panel .fdrop {
+  align-self: center;
+  justify-self: center;
+  height: clamp(210px, 25vw, 360px);
+  max-width: 100%;
+}
+
+.product-card__media .fdrop {
+  height: 88%;
+  max-width: 80%;
+}
+
+.pdp__media .fdrop {
+  width: min(78%, 433px);
+}
+
+.fdrop .fdrop__bag {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  object-fit: contain;
+  transform-origin: 50% 100%;
+}
+
+.fdrop__rain {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(var(--lead) * -1);
+  /* termina en la boca de la bolsa: lo que cae ahí "entra" */
+  height: calc(var(--lead) + 5%);
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.fdrop .fdrop__chip {
+  position: absolute;
+  top: 0;
+  left: calc(50% + (var(--x) - var(--w) / 2) * 100%);
+  width: calc(var(--w) * 100%);
+  height: auto;
+  max-width: none;
+  opacity: 0;
+  transition: none;
+  will-change: transform;
+}
+
+.pdp__media .fdrop {
+  --lead: clamp(70px, 9vw, 130px);
 }

@@ -122,7 +122,7 @@ export function BananaDrop() {
             <img
               key={i}
               className="drop__chip"
-              src={`/products/chip-${c.img}.png`}
+              src={`/products/chip-banana-${c.img}.png`}
               width={100}
               height={90}
               alt=""

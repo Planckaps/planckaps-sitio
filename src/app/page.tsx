@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { featuredProducts, site } from "@/lib/data";
 import { pageMetadata } from "@/lib/seo";
-import { Pack } from "@/components/Pack";
+import { FruitBag } from "@/components/FruitBag";
 import { FaqList } from "@/components/FaqList";
 import { AddToCartButton } from "@/components/AddToCart";
 import { PackBuilder } from "@/components/PackBuilder";
@@ -36,12 +36,12 @@ export default function Home() {
 
       <section className="panels" aria-label="Las cuatro frutas">
         {featuredProducts().map((p) => (
-          <article key={p.slug} className={`panel ${PANEL[p.fruit]}`} data-reveal>
+          <article key={p.slug} className={`panel ${PANEL[p.fruit]}`} data-reveal data-fdrop-scope>
             <h2>
               <Link href={`/tienda/${p.slug}/`}>{p.name.split(" ")[0]}</Link>
             </h2>
             <p>{p.weight}</p>
-            <Pack fruit={p.fruit} />
+            <FruitBag fruit={p.fruit} />
             <AddToCartButton slug={p.slug} name={p.name} />
           </article>
         ))}

@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { formatPrice, getCategory, getProduct, products, site } from "@/lib/data";
 import { pageMetadata } from "@/lib/seo";
 import { AddToCartWithQty } from "@/components/AddToCart";
-import { Pack } from "@/components/Pack";
+import { FruitBag } from "@/components/FruitBag";
 
 export const dynamicParams = false;
 
@@ -52,9 +52,9 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
         <li><Link href="/tienda/">Tienda</Link></li>
         {cat && (<><li>/</li><li>{cat.name}</li></>)}
       </ol>
-      <div className="pdp">
+      <div className="pdp" data-fdrop-scope>
         <div className="pdp__media">
-          <Pack fruit={p.fruit} />
+          <FruitBag fruit={p.fruit} />
         </div>
         <div className="pdp__info">
           <p className="eyebrow">{cat?.name}</p>

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useCart } from "@/context/CartContext";
+import { dropFruit } from "@/lib/rain";
 import { IconCart } from "./Icons";
 
 export function AddToCartButton({ slug, name, block = true }: { slug: string; name: string; block?: boolean }) {
@@ -12,7 +13,8 @@ export function AddToCartButton({ slug, name, block = true }: { slug: string; na
       type="button"
       className={`btn btn--add${block ? " btn--block" : ""}`}
       aria-label={`Agregar ${name} al carrito`}
-      onClick={() => {
+      onClick={(e) => {
+        dropFruit(e.currentTarget);
         add(slug, 1);
         setDone(true);
         window.setTimeout(() => setDone(false), 1600);
@@ -39,7 +41,8 @@ export function AddToCartWithQty({ slug, name }: { slug: string; name: string })
         type="button"
         className="btn btn--primary"
         aria-label={`Agregar ${qty} de ${name} al carrito`}
-        onClick={() => {
+        onClick={(e) => {
+          dropFruit(e.currentTarget);
           add(slug, qty);
           setDone(true);
           window.setTimeout(() => setDone(false), 1800);
