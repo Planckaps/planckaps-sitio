@@ -14,10 +14,9 @@ export function Header() {
 
   return (
     <header className="header">
-      <div className="container header__bar">
-        <Link href="/" className="header__logo" aria-label={`${site.name}, ir al inicio`} onClick={() => setOpen(false)}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/brand/logo-horizontal.png" alt={site.name} width={165} height={44} />
+      <div className="wrap header__bar">
+        <Link href="/" className="wordmark" aria-label={`${site.name}, ir al inicio`} onClick={() => setOpen(false)}>
+          PLANCKAPS
         </Link>
         <nav className="nav" aria-label="Principal">
           {site.nav.map((n) => (
@@ -27,9 +26,9 @@ export function Header() {
           ))}
         </nav>
         <div className="header__actions">
-          <Link href="/carrito/" className="icon-btn" aria-label={`Carrito, ${count} productos`}>
+          <Link href="/carrito/" className="header__cart" aria-label={`Carrito, ${count} productos`}>
             <IconCart />
-            {count > 0 && <span className="badge-count">{count}</span>}
+            <span>{count}</span>
           </Link>
           <button
             type="button"

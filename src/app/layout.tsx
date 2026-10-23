@@ -1,11 +1,16 @@
 import type { Metadata, Viewport } from "next";
-import "@fontsource-variable/cabin";
+import "@fontsource-variable/inter";
+import "@fontsource/space-mono/400.css";
+import "@fontsource/space-mono/700.css";
 import "./globals.css";
+import "./premium.css";
 import { site } from "@/lib/data";
 import { CartProvider } from "@/context/CartContext";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { WhatsAppFloat } from "@/components/WhatsAppFloat";
+import { Announce } from "@/components/Announce";
+import { ScrollReveal } from "@/components/ScrollReveal";
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -16,7 +21,7 @@ export const metadata: Metadata = {
   openGraph: { type: "website", siteName: site.name, locale: "es_AR" },
 };
 
-export const viewport: Viewport = { themeColor: "#184e42" };
+export const viewport: Viewport = { themeColor: "#0d0d0d" };
 
 const orgJsonLd = {
   "@context": "https://schema.org",
@@ -24,8 +29,7 @@ const orgJsonLd = {
   name: site.name,
   legalName: site.legalName,
   url: site.url,
-  logo: `${site.url}/brand/logo-horizontal.png`,
-  slogan: site.tagline,
+    slogan: site.tagline,
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -34,7 +38,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body style={{ display: "flex", flexDirection: "column", minHeight: "100dvh" }}>
         <a href="#contenido" className="sr-only skip-link">Saltar al contenido</a>
         <CartProvider>
-          <div className="announce" role="note">{site.buildNotice}</div>
+          <Announce />
           <Header />
           <main id="contenido" style={{ flex: 1 }}>{children}</main>
           <Footer />

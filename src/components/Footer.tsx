@@ -1,16 +1,17 @@
 import Link from "next/link";
 import { site, whatsappUrl } from "@/lib/data";
+import { BananaDrop } from "./BananaDrop";
 
 export function Footer() {
   const { legal, contact } = site;
   return (
     <footer className="footer">
       <div className="container">
+        <BananaDrop />
         <div className="footer__grid">
           <div className="footer__brand">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/brand/logo-horizontal-white.png" alt={site.name} width={174} height={46} />
-            <p>{site.tagline}</p>
+            
+            <p>Fruta deshidratada con tecnología DIC.</p>
             <p style={{ marginTop: "0.75rem", fontSize: "0.92rem" }}>
               {site.legalName}
               <br />
@@ -64,6 +65,7 @@ export function Footer() {
             Botón de arrepentimiento
           </Link>
         </div>
+        <div className="footer__mark" aria-hidden="true">PLANCKAPS</div>
       </div>
     </footer>
   );

@@ -9,17 +9,18 @@ const LABEL: Record<Fruit, string> = {
 };
 
 /**
- * Imagen de producto. Por ahora son mockups de referencia (sin marca final):
- * se reemplazan por las fotos reales del producto terminado.
+ * Imagen de producto (recorte sin fondo). Por ahora son mockups de referencia
+ * (sin marca final): se reemplazan por las fotos reales del producto terminado.
  */
 export function Pack({ fruit, className }: { fruit: Fruit; className?: string }) {
+  const wide = fruit === "pack";
   return (
     // eslint-disable-next-line @next/next/no-img-element
     <img
       className={className}
-      src={`/products/${fruit}.jpg`}
-      width={640}
-      height={800}
+      src={`/products/${fruit}-cut.png`}
+      width={wide ? 1000 : 551}
+      height={wide ? 528 : 789}
       loading="lazy"
       decoding="async"
       alt={`Bolsa de ${LABEL[fruit]} deshidratada (imagen de referencia)`}
