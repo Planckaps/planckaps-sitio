@@ -1126,6 +1126,7 @@ p {
 }
 
 .tile img {
+  object-position: 50% 30%;
   position: absolute;
   inset: 0;
   width: 100%;
@@ -1138,7 +1139,7 @@ p {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(24, 78, 66, 0) 40%, rgba(24, 78, 66, 0.88) 100%);
+  background: linear-gradient(180deg, rgba(24, 78, 66, 0) 30%, rgba(24, 78, 66, 0.92) 100%);
 }
 
 .tile__text {
