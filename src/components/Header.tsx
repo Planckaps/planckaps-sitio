@@ -14,15 +14,22 @@ export function Header() {
 
   return (
     <header className="header">
-      <div className="container header__bar">
-        <div className="header__left">
-          <nav className="nav" aria-label="Principal">
-            {site.nav.slice(0, 3).map((n) => (
-              <Link key={n.href} href={n.href} aria-current={pathname.startsWith(n.href) ? "page" : undefined}>
-                {n.label}
-              </Link>
-            ))}
-          </nav>
+      <div className="wrap header__bar">
+        <Link href="/" className="wordmark" aria-label={`${site.name}, ir al inicio`} onClick={() => setOpen(false)}>
+          PLANCKAPS
+        </Link>
+        <nav className="nav" aria-label="Principal">
+          {site.nav.map((n) => (
+            <Link key={n.href} href={n.href} aria-current={pathname.startsWith(n.href) ? "page" : undefined}>
+              {n.label}
+            </Link>
+          ))}
+        </nav>
+        <div className="header__actions">
+          <Link href="/carrito/" className="header__cart" aria-label={`Carrito, ${count} productos`}>
+            <IconCart />
+            <span>{count}</span>
+          </Link>
           <button
             type="button"
             className="icon-btn menu-toggle"
@@ -33,22 +40,6 @@ export function Header() {
           >
             {open ? <IconClose /> : <IconMenu />}
           </button>
-        </div>
-        <Link href="/" className="wordmark" aria-label={`${site.name}, ir al inicio`} onClick={() => setOpen(false)}>
-          PLANCKAPS
-        </Link>
-        <div className="header__actions">
-          <nav className="nav" aria-label="Secundaria" style={{ marginRight: "1.5rem" }}>
-            {site.nav.slice(3).map((n) => (
-              <Link key={n.href} href={n.href} aria-current={pathname.startsWith(n.href) ? "page" : undefined}>
-                {n.label}
-              </Link>
-            ))}
-          </nav>
-          <Link href="/carrito/" className="icon-btn" aria-label={`Carrito, ${count} productos`}>
-            <IconCart />
-            {count > 0 && <span className="badge-count">{count}</span>}
-          </Link>
         </div>
       </div>
       {open && (

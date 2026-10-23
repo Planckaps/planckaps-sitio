@@ -8,7 +8,7 @@ export function Footer() {
       <div className="container">
         <div className="footer__grid">
           <div className="footer__brand">
-            <span className="wordmark">PLANCKAPS</span>
+            
             <p>Fruta deshidratada con tecnología DIC.</p>
             <p style={{ marginTop: "0.75rem", fontSize: "0.92rem" }}>
               {site.legalName}
