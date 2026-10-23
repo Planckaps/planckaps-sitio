@@ -4,10 +4,10 @@ import type { Product } from "@/lib/types";
 import { Pack } from "./Pack";
 import { AddToCartButton } from "./AddToCart";
 
-export function ProductCard({ product, index = 0 }: { product: Product; index?: number }) {
+export function ProductCard({ product }: { product: Product }) {
   const href = `/tienda/${product.slug}/`;
   return (
-    <article className="product-card" data-reveal style={{ "--i": index % 4 } as React.CSSProperties}>
+    <article className="product-card">
       <Link href={href} className="product-card__media" aria-label={product.name}>
         {product.demo && <span className="tag tag--demo">Referencia</span>}
         <Pack fruit={product.fruit} />

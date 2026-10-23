@@ -44,11 +44,11 @@ export default function Home() {
 
       <section className="section">
         <div className="container">
-          <div className="section-head section-head--center" data-reveal>
+          <div className="section-head section-head--center">
             <p className="eyebrow">Comprá por categoría</p>
             <h2>Elegí qué querés probar</h2>
           </div>
-          <div className="tile-grid" data-reveal>
+          <div className="tile-grid">
             {categories.map((c) => (
               <Link key={c.slug} href="/tienda/" className="tile">
                 <Pack fruit={c.slug === "packs" ? "pack" : "frutilla"} />
@@ -64,13 +64,13 @@ export default function Home() {
 
       <section className="section section--ice">
         <div className="container">
-          <div className="section-head section-head--center" data-reveal>
+          <div className="section-head section-head--center">
             <p className="eyebrow">Favoritos</p>
             <h2>Nuestros snacks de fruta</h2>
           </div>
           <div className="product-grid">
-            {featuredProducts().map((p, i) => (
-              <ProductCard key={p.slug} product={p} index={i} />
+            {featuredProducts().map((p) => (
+              <ProductCard key={p.slug} product={p} />
             ))}
           </div>
           <p style={{ textAlign: "center", marginTop: "2.5rem" }}>
@@ -80,7 +80,7 @@ export default function Home() {
       </section>
 
       <section className="section">
-        <div className="container trust" data-reveal>
+        <div className="container trust">
           <div className="trust__item">
             <IconTruck />
             <h3>Envíos</h3>
@@ -109,7 +109,7 @@ export default function Home() {
 
       <section className="section">
         <div className="container">
-          <div className="feature" data-reveal>
+          <div className="feature">
             <Rings size={420} count={6} className="rings" style={{ left: "-120px", bottom: "-160px", color: "var(--lime)", opacity: 0.25 }} />
             <div className="feature__text">
               <p className="eyebrow" style={{ color: "var(--sky)" }}>Tecnología DIC</p>
@@ -138,7 +138,7 @@ export default function Home() {
 
       <section className="section" style={{ paddingTop: 0 }}>
         <div className="container">
-          <div className="band" data-reveal>
+          <div className="band">
             <Rings size={360} count={6} className="cat-card__ring" />
             <p className="eyebrow">Para empresas</p>
             <h2>¿Tenés un negocio o una marca?</h2>

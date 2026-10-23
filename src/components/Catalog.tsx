@@ -20,8 +20,8 @@ export function Catalog({ categories, products }: { categories: Category[]; prod
         ))}
       </div>
       <div className="product-grid">
-        {shown.map((p, i) => (
-          <ProductCard key={p.slug} product={p} index={i} />
+        {shown.map((p) => (
+          <ProductCard key={p.slug} product={p} />
         ))}
       </div>
     </>
