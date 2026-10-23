@@ -1,6 +1,9 @@
 import type { Metadata, Viewport } from "next";
-import "@fontsource-variable/cabin";
+import "@fontsource-variable/inter";
+import "@fontsource/instrument-serif/400.css";
+import "@fontsource/instrument-serif/400-italic.css";
 import "./globals.css";
+import "./premium.css";
 import { site } from "@/lib/data";
 import { CartProvider } from "@/context/CartContext";
 import { Header } from "@/components/Header";
@@ -17,7 +20,7 @@ export const metadata: Metadata = {
   openGraph: { type: "website", siteName: site.name, locale: "es_AR" },
 };
 
-export const viewport: Viewport = { themeColor: "#184e42" };
+export const viewport: Viewport = { themeColor: "#f7f4ef" };
 
 const orgJsonLd = {
   "@context": "https://schema.org",
@@ -25,8 +28,7 @@ const orgJsonLd = {
   name: site.name,
   legalName: site.legalName,
   url: site.url,
-  logo: `${site.url}/brand/logo-horizontal.png`,
-  slogan: site.tagline,
+    slogan: site.tagline,
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
