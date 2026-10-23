@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useCart } from "@/context/CartContext";
+import { IconCart } from "./Icons";
 
 export function AddToCartButton({ slug, name, block = true }: { slug: string; name: string; block?: boolean }) {
   const { add } = useCart();
@@ -9,7 +10,7 @@ export function AddToCartButton({ slug, name, block = true }: { slug: string; na
   return (
     <button
       type="button"
-      className={`btn btn--primary${block ? " btn--block" : ""}`}
+      className={`btn btn--add${block ? " btn--block" : ""}`}
       aria-label={`Agregar ${name} al carrito`}
       onClick={() => {
         add(slug, 1);
@@ -17,6 +18,7 @@ export function AddToCartButton({ slug, name, block = true }: { slug: string; na
         window.setTimeout(() => setDone(false), 1600);
       }}
     >
+      <IconCart size={18} />
       {done ? "¡Agregado!" : "Agregar"}
     </button>
   );

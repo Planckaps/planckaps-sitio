@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { featuredProducts, site } from "@/lib/data";
+import { categories, featuredProducts, products, site } from "@/lib/data";
 import { pageMetadata } from "@/lib/seo";
 import { Pack } from "@/components/Pack";
 import { ProductCard } from "@/components/ProductCard";
@@ -11,109 +11,98 @@ export const metadata = pageMetadata({
   path: "/",
 });
 
+const SEALS = [
+  { big: "150 g", small: "por bolsa" },
+  { big: "DIC", small: "tecnología propia" },
+  { big: "100%", small: "planta propia" },
+];
+
+const CHECKS = [
+  "Producimos en planta propia, en Nutriscience S.A.S.",
+  "Equipos propios: secador spray, DIC y lecho fluidizado.",
+  "Deshidratamos la fruta con descompresión instantánea controlada.",
+  "Datos de ensayos propios: los publicamos acá cuando estén validados.",
+];
+
 export default function Home() {
   return (
     <>
       <section className="hero">
         <div className="container hero__inner">
-          <div className="hero__copy">
-            <p className="eyebrow">Fruta deshidratada · 150 g</p>
-            <h1>
-              Fruta, <em>deshidratada</em> con tecnología DIC
-            </h1>
-            <p>Frutilla, banana, arándanos y frambuesa. Elegí tu bolsa y recibila en tu casa.</p>
-            <div className="hero__cta">
-              <Link href="/tienda/" className="btn btn--primary">Comprar ahora</Link>
-              <Link href="/tecnologia-dic/" className="btn btn--ghost">Qué es DIC</Link>
-            </div>
-          </div>
-          <div className="hero__collage">
-            <Pack fruit="arandano" className="main" />
-            <Pack fruit="frutilla" className="small" />
+          <p className="hero__brand">PLANCKAPS</p>
+          <h1>Fruta deshidratada</h1>
+          <ul className="seals" aria-label="Datos clave">
+            {SEALS.map((s) => (
+              <li key={s.big} className="seal">
+                <strong>{s.big}</strong>
+                <span>{s.small}</span>
+              </li>
+            ))}
+          </ul>
+          <Link href="/tienda/" className="btn btn--primary">Ver productos</Link>
+          <div className="hero__bags" aria-hidden="true">
+            <Pack fruit="frutilla" />
+            <Pack fruit="banana" />
+            <Pack fruit="arandano" />
+            <Pack fruit="frambuesa" />
           </div>
         </div>
       </section>
 
-      <div className="strip">
+      <section className="shop">
         <div className="container">
-          <ul>
-            <li>Bolsas de 150 g</li>
-            <li>Tecnología DIC</li>
-            <li>Planta propia</li>
-            <li>Pedido por WhatsApp</li>
-          </ul>
-        </div>
-      </div>
-
-      <section className="section">
-        <div className="container">
-          <div className="collection-head" data-reveal>
-            <div>
-              <p className="eyebrow" style={{ marginBottom: "0.9rem" }}>La colección</p>
-              <h2>Cuatro frutas</h2>
-            </div>
-            <Link href="/tienda/" className="link-arrow">Ver todo <span aria-hidden="true">→</span></Link>
+          <div className="pills" role="list" aria-label="Categorías">
+            <Link href="/tienda/" className="pill pill--on" role="listitem">Más elegidos</Link>
+            {categories.map((c) => (
+              <Link key={c.slug} href="/tienda/" className="pill" role="listitem">{c.name}</Link>
+            ))}
+          </div>
+          <div className="center-head" data-reveal>
+            <h2>¿Querés ver lo más elegido?</h2>
+            <p className="mono">Los productos favoritos de la comunidad</p>
           </div>
           <div className="product-grid">
             {featuredProducts().map((p, i) => (
               <ProductCard key={p.slug} product={p} index={i} />
             ))}
           </div>
+          <p style={{ textAlign: "center", marginTop: "2.5rem" }}>
+            <Link href="/tienda/" className="btn btn--ghost">Ver toda la tienda</Link>
+          </p>
         </div>
       </section>
 
-      <section data-reveal>
-        <div className="ed ed--dark">
-          <div className="ed__img"><Pack fruit="banana" /></div>
-          <div className="ed__text">
-            <p className="eyebrow">Tecnología DIC</p>
-            <h2>Deshidratada con <em>tecnología propia</em></h2>
-            <p>Usamos descompresión instantánea controlada en nuestra planta. Conocé cómo funciona el proceso.</p>
-            <Link href="/tecnologia-dic/" className="btn btn--lime">Conocer DIC</Link>
+      <section className="dark">
+        <div className="container dark__inner" data-reveal>
+          <span className="tag-pill">Tecnología DIC</span>
+          <h2>Deshidratada con tecnología propia</h2>
+          <ul className="checks">
+            {CHECKS.map((c) => (
+              <li key={c}>
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="M7.5 12.5l3 3 6-6.5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+                <span>{c}</span>
+              </li>
+            ))}
+          </ul>
+          <div className="circles">
+            {products.filter((p) => p.fruit !== "pack").map((p) => (
+              <Link key={p.slug} href={`/tienda/${p.slug}/`} className="circle">
+                <span className="circle__img"><Pack fruit={p.fruit} /></span>
+                <span className="tag-pill">{p.name.split(" ")[0]}</span>
+              </Link>
+            ))}
           </div>
-        </div>
-      </section>
-
-      <section data-reveal>
-        <div className="ed ed--flip">
-          <div className="ed__img"><Pack fruit="pack" /></div>
-          <div className="ed__text">
-            <p className="eyebrow">Pack degustación</p>
-            <h2>Probá las <em>cuatro</em></h2>
-            <p>Una bolsa de cada fruta en un solo pedido.</p>
-            <Link href="/tienda/pack-degustacion/" className="link-arrow">Ver el pack <span aria-hidden="true">→</span></Link>
-          </div>
+          <Link href="/tecnologia-dic/" className="btn btn--light">Conocer DIC</Link>
         </div>
       </section>
 
       <section className="section">
-        <div className="container trust" data-reveal>
-          <div className="trust__item">
-            <h3>Envíos</h3>
-            <p>Zonas, plazos y costos en definición.</p>
-            <span className="pending-note">A definir</span>
-          </div>
-          <div className="trust__item">
-            <h3>Compra protegida</h3>
-            <p>Botón de arrepentimiento visible y 10 días corridos para revocar.</p>
-          </div>
-          <div className="trust__item">
-            <h3>Planta propia</h3>
-            <p>Producimos con equipos propios en Nutriscience S.A.S.</p>
-            <span className="pending-note">Ubicación a confirmar</span>
-          </div>
-          <div className="trust__item">
-            <h3>Atención directa</h3>
-            <p>Te respondemos las dudas por WhatsApp antes de comprar.</p>
-            <span className="pending-note">Número a cargar</span>
-          </div>
-        </div>
-      </section>
-
-      <section className="section" style={{ paddingTop: 0 }}>
         <div className="container two-col">
-          <div className="section-head" data-reveal>
-            <p className="eyebrow">Ayuda</p>
+          <div className="faq-head" data-reveal>
+            <p className="mono">Ayuda</p>
             <h2>Preguntas frecuentes</h2>
             <p className="lead">Lo que más nos consultan antes de comprar.</p>
           </div>
@@ -126,10 +115,10 @@ export default function Home() {
       <section className="section" style={{ paddingTop: 0 }}>
         <div className="container">
           <div className="band" data-reveal>
-            <p className="eyebrow">Para empresas</p>
+            <p className="mono">Para empresas</p>
             <h2>¿Tenés un negocio o una marca?</h2>
             <p>También desarrollamos ingredientes funcionales. Contanos qué necesitás.</p>
-            <div><Link href="/empresas/" className="btn btn--primary">Hablemos</Link></div>
+            <div><Link href="/empresas/" className="btn btn--light">Hablemos</Link></div>
           </div>
         </div>
       </section>
