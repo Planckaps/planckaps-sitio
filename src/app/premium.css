@@ -951,7 +951,7 @@ h4 {
 
 .drop {
   --sh: clamp(330px, 36vw, 520px);
-  --bh: calc(var(--sh) * 0.82);
+  --bh: calc(var(--sh) * 0.7);
   --bw: calc(var(--bh) * 0.699);
   display: grid;
   grid-template-columns: minmax(0, 1fr);
@@ -1037,11 +1037,23 @@ h4 {
   transform-origin: 50% 100%;
 }
 
+.drop__rain {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -12rem;
+  /* termina en la boca de la bolsa: lo que cae ahí "entra" */
+  height: calc(12rem + var(--sh) - var(--bh) + var(--bh) * 0.05);
+  overflow: hidden;
+  pointer-events: none;
+}
+
 .drop__chip {
   position: absolute;
+  top: 0;
   height: auto;
   width: calc(var(--bw) * var(--w));
   left: calc(50% + var(--bw) * var(--x) - var(--bw) * var(--w) / 2);
-  bottom: calc(var(--bw) * var(--y));
+  opacity: 0;
   will-change: transform;
 }
