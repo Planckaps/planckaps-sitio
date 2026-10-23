@@ -43,6 +43,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <main id="contenido" style={{ flex: 1 }}>{children}</main>
           <Footer />
           <WhatsAppFloat />
+          <ScrollReveal />
         </CartProvider>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }} />
       </body>
